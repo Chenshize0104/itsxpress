@@ -23,17 +23,17 @@ plugin = Plugin(
     website='https://github.com/USDA-ARS-GBRU/q2_itsxpress             '
             'ITSxpress: https://github.com/USDA-ARS-GBRU/itsxpress',
     description='ITSxpress trims amplicon reads down to their ITS region. '
-                variants'ITSxpress is designed to support the calling of exact sequence variants '
+                'ITSxpress is designed to support the calling of exact sequence variants '
                 'rather than OTUs. This newer method of sequence error-correction requires '
                 'quality score data from each sequence, so each input sequence must be trimmed. '
-                replicating'ITSxpress makes this possible by taking FASTQ data, de-replicating the '
+                'ITSxpress makes this possible by taking FASTQ data, de-replicating the '
                 'sequences then identifying the start and stop sites using HMMSearch. '
-                parsed'Results are parsed and the trimmed files are returned. '
+                'Results are parsed and the trimmed files are returned. '
                 'The ITS 1, ITS2 or the entire ITS region including the 5.8s rRNA'
                 'gene can be selected. ALL requires very long reads so it is not routinely'
                 'used with Illumina data. ITSxpress uses the hmm models from ITSx so results are comparable.',
-    short_description=rapidly'Plugin for using ITSxpress to rapidly trim the\n'
-                      internallytranscribed'internally transcribed spacer (ITS) region of FASTQ files.',
+    short_description='Plugin for using ITSxpress to rapidly trim the\n'
+                      'internally transcribed spacer (ITS) region of FASTQ files.',
     citations=Citations.load('citations.bib', package='itsxpress')
 )
 
@@ -42,7 +42,7 @@ taxaList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'ALL', 'O', '
 plugin.methods.register_function(
     function=trim_single,
     inputs={'per_sample_sequences': SampleData[SequencesWithQuality]},
-    parameters={'region': Str % Choices(['ITS2', 'ITS1', 'ALL']),
+    parameters={'region': Str % Choices(['ITS2', '5.8S', 'ITS1', 'ALL']),
                 'taxa': Str % Choices(taxaList),
                 'threads': Int,
                 'cluster_id': Float % Range(0.995, 1.0, inclusive_start=True, inclusive_end=True)},
@@ -51,7 +51,7 @@ plugin.methods.register_function(
                                                 ' Either Joined Paired or just a single fastq.'
                                                 ' One file sequences in the qza data folder.'},
     parameter_descriptions={
-        'region': ('\nThe regions ITS2, ITS1, and ALL that can be selected from.'),
+        'region': ('\nThe regions ITS2, 5.8S, ITS1, and ALL that can be selected from.'),
         'taxa': ('\nThe selected taxonomic group sequenced that can be selected from.'),
         'threads': ('\nThe number of processor threads to use in the run.'),\
         'cluster_id': ('\nThe percent identity for clustering reads, set to 1 for exact dereplication.')
@@ -100,7 +100,7 @@ plugin.methods.register_function(
                                                 'Only Paired can be used. '
                                                 'Two files sequences in the qza data folder'},
     parameter_descriptions={
-        'region': ('\nThe regions ITS2, ITS1, and ALL that can be selected from.'),
+        'region': ('\nThe regions ITS2, 5.8S, ITS1, and ALL that can be selected from.'),
         'taxa': ('\nThe selected taxonomic group sequenced that can be selected from.'),
         'threads': ('\nThe number of processor threads to use in the run.'),
         'cluster_id': ('\nThe percent identity for clustering reads, set to 1 for exact dereplication.'),
@@ -141,7 +141,7 @@ plugin.methods.register_function(
 plugin.methods.register_function(
     function=trim_pair_output_unmerged,
     inputs={'per_sample_sequences': SampleData[PairedEndSequencesWithQuality]},
-    parameters={'region': Str % Choices(['ITS2', 'ITS1', 'ALL']),
+    parameters={'region': Str % Choices(['ITS2', '5.8S', 'ITS1', 'ALL']),
                 'taxa': Str % Choices(taxaList),
                 'threads': Int,
                 'reversed_primers': Bool,
@@ -152,7 +152,7 @@ plugin.methods.register_function(
                                                 'Only Paired can be used. '
                                                 'Two files sequences in the qza data folder'},
     parameter_descriptions={
-        'region': ('\nThe regions ITS2, ITS1, and ALL that can be selected from.'),
+        'region': ('\nThe regions ITS2, 5.8S, ITS1, and ALL that can be selected from.'),
         'taxa': ('\nThe selected taxonomic group sequenced that can be selected from.'),
         'threads': ('\nThe number of processor threads to use in the run.'),
         'cluster_id': ('\nThe percent identity for clustering reads, set to 1 for exact dereplication.'),
