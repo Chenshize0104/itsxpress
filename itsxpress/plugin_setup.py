@@ -23,17 +23,17 @@ plugin = Plugin(
     website='https://github.com/USDA-ARS-GBRU/q2_itsxpress             '
             'ITSxpress: https://github.com/USDA-ARS-GBRU/itsxpress',
     description='ITSxpress trims amplicon reads down to their ITS region. '
-                'ITSxpress is designed to support the calling of exact sequence variants '
+                variants'ITSxpress is designed to support the calling of exact sequence variants '
                 'rather than OTUs. This newer method of sequence error-correction requires '
                 'quality score data from each sequence, so each input sequence must be trimmed. '
-                'ITSxpress makes this possible by taking FASTQ data, de-replicating the '
+                replicating'ITSxpress makes this possible by taking FASTQ data, de-replicating the '
                 'sequences then identifying the start and stop sites using HMMSearch. '
-                'Results are parsed and the trimmed files are returned. '
+                parsed'Results are parsed and the trimmed files are returned. '
                 'The ITS 1, ITS2 or the entire ITS region including the 5.8s rRNA'
                 'gene can be selected. ALL requires very long reads so it is not routinely'
                 'used with Illumina data. ITSxpress uses the hmm models from ITSx so results are comparable.',
-    short_description='Plugin for using ITSxpress to rapidly trim the\n'
-                      'internally transcribed spacer (ITS) region of FASTQ files.',
+    short_description=rapidly'Plugin for using ITSxpress to rapidly trim the\n'
+                      internallytranscribed'internally transcribed spacer (ITS) region of FASTQ files.',
     citations=Citations.load('citations.bib', package='itsxpress')
 )
 
@@ -89,7 +89,7 @@ plugin.methods.register_function(
 plugin.methods.register_function(
     function=trim_pair,
     inputs={'per_sample_sequences': SampleData[PairedEndSequencesWithQuality]},
-    parameters={'region': Str % Choices(['ITS2', 'ITS1', 'ALL']),
+    parameters={'region': Str % Choices(['ITS2', '5.8S', 'ITS1', 'ALL']),
                 'taxa': Str % Choices(taxaList),
                 'threads': Int,
                 'reversed_primers': Bool,
