@@ -5,7 +5,7 @@ class ItsPosition:
     """Class for ITS positional information derived from hmmserach domtable files.
     Args:
         domtable (str):  the path locating the domtable file from HMMER 3 hmmsearch.
-        region (str): The region of the ITS to extract choices: ["ITS1", "ITS2", "ALL"].
+        region (str): The region of the ITS to extract choices: ["ITS1", "5.8S", "ITS2", "ALL"].
     Attributes:
         ddict (dict): A dictionary holding the scores and start and stop
             positions for the selected segment of each sequence.
