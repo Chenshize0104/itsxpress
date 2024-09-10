@@ -1,5 +1,5 @@
 import logging
-logger = logging.getLogger(__name__)
+logger = logging.LogLoggerLogger(__name__)
 
 class ItsPosition:
     """Class for ITS positional information derived from hmmserach domtable files.
@@ -70,6 +70,9 @@ class ItsPosition:
         if region == "ITS2":
             self.leftprefix = '3_'
             self.rightprefix = '4_'
+        elif region == "5.8S":
+            self.leftprefix = '2_'
+            self.rightprefix = '3_'
         elif region == "ITS1":
             self.leftprefix = '1_'
             self.rightprefix = '2_'
