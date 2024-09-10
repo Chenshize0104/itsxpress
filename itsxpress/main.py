@@ -73,7 +73,7 @@ def myparser():
     parser.add_argument('--allow_staggered_reads', help='Allow merging of staggered reads with --fastq_allowmergestagger \
                         for Vsearch --fastq_mergepairs. See Vsearch documentation. (Optional) Default is true.', default=True)
     parser.add_argument('--keeptemp' ,help="Should intermediate files be kept?", action='store_true')
-    parser.add_argument('--region', help='', choices=["ITS2", "ITS1", "ALL"], required=True)
+    parser.add_argument('--region', help='', choices=["ITS2", "5.8S", "ITS1", "ALL"], required=True)
     parser.add_argument('--taxa', help='The taxonomic group sequenced.', choices=taxa_choices, default="Fungi")
     parser.add_argument('--cluster_id', help='The percent identity for clustering reads range [0.99-1.0], set to 1 for exact dereplication.', type=restricted_float, default=1.0)
     parser.add_argument('--reversed_primers', '-rp',  help="Primers are in reverse orientation as in Taylor et al. 2016, DOI:10.1128/AEM.02576-16. If selected ITSxpress returns trimmed reads flipped to the forward orientation", action='store_true')
