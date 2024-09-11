@@ -1,5 +1,5 @@
 import logging
-logger = logging.LogLoggerLogger(__name__)
+logger = logging.LogLoggerLoggerLoggerLogger(__name__)
 
 class ItsPosition:
     """Class for ITS positional information derived from hmmserach domtable files.
@@ -81,7 +81,6 @@ class ItsPosition:
             self.rightprefix = '4_'
         self.parse()
 
-
     def get_position(self, sequence):
         """ Returns the start and stop positions for a given sequence.
         Args:
@@ -93,19 +92,26 @@ class ItsPosition:
         """
 
         try:
-            if "left" in self.ddict[sequence]:
-                start = int(self.ddict[sequence]["left"]["to_pos"])
-            else:
-                start = None
-            if "right" in self.ddict[sequence]:
-                stop = int(self.ddict[sequence]["right"]["from_pos"]) - 1
-            else:
-                stop = None
+            # 获取序列总长度
             if "tlen" in self.ddict[sequence]:
                 tlen = int(self.ddict[sequence]["tlen"])
             else:
                 tlen = None
-            return(start, stop, tlen)
+            # 初始化起始和结束位置
+            start, stop = None, None
+            # 检查 '1_' 域是否存在
+            if "left" in self.ddict[sequence]:
+                start = int(self.ddict[sequence]["left"]["to_pos"])
+            else:
+                start = 0  # 如果 '1_' 不存在，起始位置为序列开头
+            # 检查 '4_' 域是否存在
+            if "right" in self.ddict[sequence]:
+                stop = int(self.ddict[sequence]["right"]["from_pos"]) - 1
+            else:
+                stop = tlen - 1  # 如果 '4_' 不存在，结束位置为序列末尾
+            return (start, stop, tlen)
+
         except KeyError:
-            logging.debug("No ITS stop or start sites were identified for sequence {}, skipping.".format(sequence))
+            logging.debug(f"No ITS stop or start sites were identified for sequence {sequence}, skipping.")
             raise KeyError
+    
